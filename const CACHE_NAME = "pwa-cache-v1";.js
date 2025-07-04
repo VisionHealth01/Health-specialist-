@@ -1,16 +1,16 @@
 const CACHE_NAME = "pwa-cache-v1";
-conts urlsToCache = ["index.html", "style.css", "app.js"];
+const urlsToCache = ["index.html", "style.css", "app.js"];
 
 self.addEventListener("install", (event) => {
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then((cache) => cache.addAll(urlsToCache))
-    );
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(urlsToCache))
+  );
 });
 
 self.addEventListener("fetch", (event) => {
-    event.respondWith(
-        caches.match(event.request)
-            .then((res) => res || fetch(event.request))
-    );
+  event.respondWith(
+    caches.match(event.request)
+      .then((res) => res || fetch(event.request))
+  );
 });
